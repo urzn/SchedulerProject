@@ -82,7 +82,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
             }
         }
 
-        return jdbcTemplate.query(sql.toString(), scheduleRowMapper(), args);
+        return jdbcTemplate.query(sql.toString(), scheduleRowMapper(), args.toArray());
     }
 
     @Override
