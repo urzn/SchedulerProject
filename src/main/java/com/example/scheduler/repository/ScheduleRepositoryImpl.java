@@ -96,6 +96,12 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
     }
 
     @Override
+    public List<ScheduleResponseDto> findScheduleByUserId(Long userId) {
+
+        return jdbcTemplate.query("select * from schedule where user_id = ?", scheduleRowMapper(),userId);
+    }
+
+    @Override
     public int updateSchedule(Long id, String name, String content) {
         int result = jdbcTemplate.update("update schedule set name = ?, content = ? where id = ?", name, content, id);
 

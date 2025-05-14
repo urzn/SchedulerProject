@@ -56,10 +56,19 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         // 필수값 검증
         if(name == null && updatedDate == null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Name or updatedDate are required values.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이름 혹은 수정날짜를 입력해주세요.");
         }
 
         return scheduleRepository.findScheduleByNameOrDate(name, updatedDate);
+    }
+
+    @Override
+    public List<ScheduleResponseDto> findScheduleByUserId(Long userId) {
+        if(userId == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Id를 입력해주세요.");
+        }
+
+        return scheduleRepository.findScheduleByUserId(userId);
     }
 
     @Transactional

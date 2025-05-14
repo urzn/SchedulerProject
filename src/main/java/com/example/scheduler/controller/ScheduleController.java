@@ -48,6 +48,12 @@ public class ScheduleController{
         return scheduleService.findScheduleByNameOrDate(name, date);
     }
 
+    @GetMapping("/search/by-user")
+    public List<ScheduleResponseDto> findScheduleByUserId(
+            @RequestParam Long userId
+    ) {
+        return scheduleService.findScheduleByUserId(userId);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateSchedule(
