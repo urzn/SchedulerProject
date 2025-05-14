@@ -51,7 +51,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public List<ScheduleResponseDto> findScheduleByNameOrDate(String name, LocalDate updatedDate){
+    public List<ScheduleResponseDto> findScheduleByNameOrDate(String name, String updatedDate){
 
         // 필수값 검증
         if(name == null && updatedDate == null){

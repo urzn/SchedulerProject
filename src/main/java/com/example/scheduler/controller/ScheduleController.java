@@ -41,12 +41,12 @@ public class ScheduleController{
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String date
     ){
-        LocalDate updatedDate = null;
-        if(date != null){
-            updatedDate = LocalDate.parse(date);
-        }
+//        LocalDate updatedDate = null;
+//        if(date != null){
+//            updatedDate = LocalDate.parse(date);
+//        }
 
-        return scheduleService.findScheduleByNameOrDate(name, updatedDate);
+        return scheduleService.findScheduleByNameOrDate(name, date);
     }
 
 
