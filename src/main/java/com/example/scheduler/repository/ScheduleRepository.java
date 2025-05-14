@@ -12,7 +12,7 @@ public interface ScheduleRepository {
     ScheduleResponseDto saveSchedule(Schedule schedule);
     List<ScheduleResponseDto> findAllSchedules();
     Schedule findScheduleByIdOrElseThrow(Long id);
-    List<ScheduleResponseDto> findScheduleByNameOrDate(String name, LocalDate updatedDate);
+    List<ScheduleResponseDto> findScheduleByNameOrDate(String name, String updatedDate);
     int updateSchedule(Long id, String name, String content);
     int deleteSchedule(Long id);
 

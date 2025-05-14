@@ -58,7 +58,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
     }
 
     @Override
-    public List<ScheduleResponseDto> findScheduleByNameOrDate(String name, LocalDate updatedDate){
+    public List<ScheduleResponseDto> findScheduleByNameOrDate(String name, String updatedDate){
         StringBuilder sql = new StringBuilder("select * from schedule where ");
         List<Object> args = new ArrayList<>();
 
@@ -70,17 +70,18 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
 
             // 이름과 날짜로 조회하려고 할 때
             if(updatedDate != null){
-                sql.append(" and updatedDate = ?");
+                sql.append(" and DATE(updatedDate) = ?");
                 args.add(updatedDate);
             }
         }
         else{
             // 날짜로만 조회하려고 할 때
             if(updatedDate != null){
-                sql.append("updatedDate = ?");
+                sql.append("DATE(updatedDate) = ?");
                 args.add(updatedDate);
             }
         }
+        sql.append(" order by updatedDate DESC");
 
         return jdbcTemplate.query(sql.toString(), scheduleRowMapper(), args.toArray());
     }
