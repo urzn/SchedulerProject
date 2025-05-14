@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class ScheduleResponseDto {
     private final Long id;
     private String name;
+    private String email;
     private String content;
     private final LocalDateTime createdDate;
     private LocalDateTime updatedDate;
@@ -19,6 +20,7 @@ public class ScheduleResponseDto {
     public ScheduleResponseDto(Schedule schedule){
         this.id = schedule.getId();
         this.name = schedule.getName();
+        this.email = schedule.getEmail();
         this.content = schedule.getContent();
         this.createdDate = schedule.getCreatedDate();
         this.updatedDate = schedule.getUpdatedDate();

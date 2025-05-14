@@ -35,13 +35,14 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", schedule.getName());
         parameters.put("pw", schedule.getPw());
+        parameters.put("email", schedule.getEmail());
         parameters.put("content", schedule.getContent());
         parameters.put("createdDate", Timestamp.valueOf(schedule.getCreatedDate()));
         parameters.put("updatedDate", Timestamp.valueOf(schedule.getUpdatedDate()));
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 
-        return new ScheduleResponseDto(key.longValue(), schedule.getName(), schedule.getContent(), schedule.getCreatedDate(), schedule.getUpdatedDate());
+        return new ScheduleResponseDto(key.longValue(), schedule.getName(), schedule.getEmail(), schedule.getContent(), schedule.getCreatedDate(), schedule.getUpdatedDate());
     }
 
     @Override
@@ -105,6 +106,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
                 return new ScheduleResponseDto(
                         rs.getLong("id"),
                         rs.getString("name"),
+                        rs.getString("email"),
                         rs.getString("content"),
                         rs.getTimestamp("createdDate").toLocalDateTime(),
                         rs.getTimestamp("updatedDate").toLocalDateTime()
@@ -120,6 +122,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
                         rs.getLong("id"),
                         rs.getString("name"),
                         rs.getString("pw"),
+                        rs.getString("email"),
                         rs.getString("content"),
                         rs.getTimestamp("createdDate").toLocalDateTime(),
                         rs.getTimestamp("updatedDate").toLocalDateTime()
