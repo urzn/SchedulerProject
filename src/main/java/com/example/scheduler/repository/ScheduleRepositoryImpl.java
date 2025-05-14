@@ -32,6 +32,13 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         jdbcInsert.withTableName("schedule").usingGeneratedKeyColumns("id");
 
+        String findUserSql = "select id from user where name = ? and email = ?";
+        Long userId = jdbcTemplate.queryForObject(findUserSql, new String[]{schedule.getName(), schedule.getEmail()}, Long.class);
+
+        if (userId == null){
+            throw new RuntimeException("해당 유저가 없습니다. 유저를 생성한 후 일정을 입력해주세요.");
+        }
+
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", schedule.getName());
         parameters.put("pw", schedule.getPw());
@@ -39,6 +46,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepository {
         parameters.put("content", schedule.getContent());
         parameters.put("createdDate", Timestamp.valueOf(schedule.getCreatedDate()));
         parameters.put("updatedDate", Timestamp.valueOf(schedule.getUpdatedDate()));
+        parameters.put("user_id", userId);
 
         Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
 

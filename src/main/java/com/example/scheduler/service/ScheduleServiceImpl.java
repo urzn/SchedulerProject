@@ -28,6 +28,7 @@ public class ScheduleServiceImpl implements ScheduleService{
         Schedule schedule = Schedule.builder()
                 .name(requestDto.getName())
                 .pw(requestDto.getPw())
+                .email(requestDto.getEmail())
                 .content(requestDto.getContent())
                 .createdDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
